@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Fuji Rikyu Guide</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    .content-scroll {
+      max-height: 350px;
+      overflow-y: auto;
+    }
+
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      background: #f8f8f8;
+      color: #333;
+      line-height: 1.7;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+      color: #444;
+    }
+
+    .lang-switch {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .lang-btn {
+      display: inline-block;
+      padding: 8px 16px;
+      margin: 0 5px;
+      border-radius: 20px;
+      border: 1px solid #ccc;
+      background: #fff;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .lang-btn.active {
+      background: #333;
+      color: #fff;
+      border-color: #333;
+    }
+
+    .hint {
+      text-align: center;
+      font-size: 13px;
+      color: #777;
+      margin-bottom: 10px;
+    }
+
+    .icon-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .icon-card {
+      background: #fff;
+      padding: 20px 10px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .icon-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+
+    .icon {
+      font-size: 35px;
+      margin-bottom: 10px;
+    }
+
+    .content-section {
+      display: none;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 5px;
+      margin-bottom: 15px;
+      color: #444;
+    }
+
+    h3 {
+      margin-top: 20px;
+      margin-bottom: 8px;
+      color: #444;
+    }
+
+    ul {
+      margin-left: 20px;
+    }
+
+    table {
+      font-size: 14px;
+    }
+
+    th, td {
+      font-size: 14px;
+    }
+  </style>
+
+  <script>
+    function setLanguage(lang) {
+      const jp = document.getElementById('jp-content');
+      const en = document.getElementById('en-content');
+      const jpBtn = document.getElementById('btn-jp');
+      const enBtn = document.getElementById('btn-en');
+
+      if (lang === 'jp') {
+        jp.style.display = 'block';
+        en.style.display = 'none';
+        jpBtn.classList.add('active');
+        enBtn.classList.remove('active');
+      } else {
+        jp.style.display = 'none';
+        en.style.display = 'block';
+        jpBtn.classList.remove('active');
+        enBtn.classList.add('active');
+      }
+
+      // どちらの言語でも、開いているセクションはいったん全部閉じる
+      const sections = document.querySelectorAll('.content-section');
+      sections.forEach(s => s.style.display = 'none');
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function showSection(lang, id) {
+      const containerId = lang === 'jp' ? 'jp-content' : 'en-content';
+      const container = document.getElementById(containerId);
+
+      const sections = container.querySelectorAll('.content-section');
+      sections.forEach(s => s.style.display = 'none');
+
+      const target = container.querySelector('#' + id);
+      if (target) {
+        target.style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    window.onload = function() {
+      setLanguage('jp');
+    };
+  </script>
+
+</head>
+<body>
+
+  <h1>富士離宮 ご利用案内 / Fuji Rikyu Guide</h1>
+
+  <div class="lang-switch">
+    <button id="btn-jp" class="lang-btn active" onclick="setLanguage('jp')">🇯🇵 Japanese</button>
+    <button id="btn-en" class="lang-btn" onclick="setLanguage('en')">🇺🇸 English</button>
+  </div>
+
+  <!-- ================= 日本語 ================= -->
+  <div id="jp-content">
+    <div class="hint">アイコンをタップすると、詳細が表示されます / Tap an icon to see details</div>
+
+    <div class="icon-grid">
+      <!-- チェックイン：日本語フォームに直接ジャンプ -->
+      <div class="icon-card" onclick="window.open('https://forms.gle/TiZczxFpLD5fP1NP8','_blank')">
+        <div class="icon">🛎️</div>
+        <div>チェックイン</div>
+      </div>
+
+      <!-- チェックアウト：日本語フォームに直接ジャンプ -->
+      <div class="icon-card" onclick="window.open('https://forms.gle/UpERrtP5bVwZF3Co8','_blank')">
+        <div class="icon">✔️</div>
+        <div>チェックアウト</div>
+      </div>
+
+      <div class="icon-card" onclick="showSection('jp','parking')">
+        <div class="icon">🚗</div>
+        <div>駐車場</div>
+      </div>
+      <div class="icon-card" onclick="showSection('jp','stay')">
+        <div class="icon">🏠</div>
+        <div>滞在中</div>
+      </div>
+      <div class="icon-card" onclick="showSection('jp','exit')">
+        <div class="icon">🚪</div>
+        <div>退出時</div>
+      </div>
+      <div class="icon-card" onclick="showSection('jp','winter')">
+        <div class="icon">❄️</div>
+        <div>冬期間</div>
+      </div>
+      <div class="icon-card" onclick="showSection('jp','bath')">
+        <div class="icon">🛁</div>
+        <div>入浴</div>
+      </div>
+      <div class="icon-card" onclick="showSection('jp','rules')">
+        <div class="icon">⚠️</div>
+        <div>禁止事項</div>
+      </div>
+      <div class="icon-card" onclick="showSection('jp','price')">
+        <div class="icon">💴</div>
+        <div>宿泊料金</div>
+      </div>
+      <div class="icon-card" onclick="showSection('jp','activity')">
+        <div class="icon">🏃</div>
+        <div>アクティビティ</div>
+      </div>
+      <div class="icon-card" onclick="showSection('jp','netflix')">
+        <div class="icon">📺</div>
+        <div>Netflix</div>
+      </div>
+    </div>
+
+    <!-- 駐車場 -->
+    <div id="parking" class="content-section">
+      <h2>駐車場</h2>
+      <ul>
+        <li>駐車場所は <b>第5号（ヤマシンホーム）</b> です。</li>
+        <li>到着後、フロントガラスの見える位置に「駐車許可証」を置いてください。</li>
+        <li>2台以上で来られた場合：2番館の空き駐車場を利用できますが、オンシーズンは利用不可のためフロントへご確認ください。</li>
+      </ul>
+    </div>
+
+    <!-- 滞在中 -->
+    <div id="stay" class="content-section">
+      <h2>滞在中（オートロック）</h2>
+      <ul>
+        <li>玄関はオートロックです。</li>
+        <li><b>① 部屋に人がいる場合：</b> Ⅱ番館玄関のインターホンで呼び出し → 室内の「解除」ボタンで解錠します。</li>
+        <li><b>② 部屋に人がいない場合：</b> お部屋の鍵で解錠できます。外出時は必ず鍵を持って出てください。</li>
+      </ul>
+    </div>
+
+    <!-- 退出時 -->
+    <div id="exit" class="content-section">
+      <h2>退出時</h2>
+      <ul>
+        <li>ごみは分別して置いてください。</li>
+        <ul>
+          <li>可燃ごみ：紙・ビニール・プラスチック・生ごみ</li>
+          <li>不燃ごみ：ビン・缶</li>
+        </ul>
+        <li>お掃除業者が回収しますので、ビニール袋に入れて口を軽く縛ってください。</li>
+        <li>冷蔵庫の中身は空にしてください。</li>
+        <li>持ち込んだアメニティ類はすべてお持ち帰りください。</li>
+        <li>退出チェックリスト（QRコード）にアクセスし、チェックしてからご退出ください。</li>
+      </ul>
+    </div>
+
+    <!-- 冬期間 -->
+    <div id="winter" class="content-section">
+      <h2>冬期間の利用</h2>
+      <ul>
+        <li>給排水設備が凍結する可能性があります。</li>
+        <li>水抜きなど特別な作業が必要になります。詳しい手順は別途ご案内いたします。</li>
+      </ul>
+    </div>
+
+    <!-- 入浴 -->
+    <div id="bath" class="content-section">
+      <h2>入浴</h2>
+      <ul>
+        <li>お湯は電気温水器で沸かしています。貯水量が限られているため、節水にご協力ください。</li>
+        <li>入浴中および浴室使用後は、30分以上換気扇を回してください。</li>
+      </ul>
+    </div>
+
+    <!-- 禁止事項 -->
+    <div id="rules" class="content-section">
+      <h2>禁止事項</h2>
+      <ul>
+        <li>夜10時以降、朝7時前の出発・到着</li>
+        <li>室内での喫煙（電子タバコ・紙たばこともに禁止）</li>
+        <li>他の利用者に迷惑となる行為全般</li>
+        <li>テレビ・スピーカー・スマートフォン等の大音量利用</li>
+        <li>サブスクリプションサービスでの個人的な購入</li>
+        <li>室内備品の持ち帰り</li>
+        <li>室内の破損・損傷</li>
+      </ul>
+    </div>
+
+    <!-- 宿泊料金 -->
+    <div id="price" class="content-section">
+      <h2>宿泊料金</h2>
+      <ul>
+        <li>未就学児：無料</li>
+        <li>小学生以上：一律 2,000円</li>
+        <li>ペット同伴：＋5,000円</li>
+      </ul>
+    </div>
+
+    <!-- アクティビティ -->
+    <div id="activity" class="content-section">
+      <h2>アクティビティ 利用案内</h2>
+
+      <h3>■ オンシーズン（4/29～5/5・7/1～9/30）</h3>
+      <table style="width:100%; border-collapse: collapse; margin:15px 0;">
+        <tr style="background:#eee;">
+          <th style="padding:10px; border:1px solid #ccc;">施設</th>
+          <th style="padding:10px; border:1px solid #ccc;">利用時間</th>
+        </tr>
+        <tr><td style="padding:8px; border:1px solid #ccc;">フロント</td><td style="padding:8px; border:1px solid #ccc;">9:00〜19:00</td></tr>
+        <tr><td style="padding:8px; border:1px solid #ccc;">プール・サウナ</td><td style="padding:8px; border:1px solid #ccc;">10:00〜18:00</td></tr>
+        <tr><td style="padding:8px; border:1px solid #ccc;">スカッシュコート</td><td style="padding:8px; border:1px solid #ccc;">10:00〜18:00</td></tr>
+        <tr><td style="padding:8px; border:1px solid #ccc;">フィットネススタジオ</td><td style="padding:8px; border:1px solid #ccc;">10:00〜18:00</td></tr>
+        <tr><td style="padding:8px; border:1px solid #ccc;">レストラン</td><td style="padding:8px; border:1px solid #ccc;">10:00〜21:00（火曜定休）</td></tr>
+        <tr><td style="padding:8px; border:1px solid #ccc;">バーカウンター</td><td style="padding:8px; border:1px solid #ccc;">21:00〜23:00（火曜定休）</td></tr>
+        <tr><td style="padding:8px; border:1px solid #ccc;">パーティガーデン</td><td style="padding:8px; border:1px solid #ccc;">10:00〜21:00</td></tr>
+        <tr><td style="padding:8px; border:1px solid #ccc;">アプローチレンジ</td><td style="padding:8px; border:1px solid #ccc;">10:00〜18:00</td></tr>
+        <tr><td style="padding:8px; border:1px solid #ccc;">テニスコート</td><td style="padding:8px; border:1px solid #ccc;">10:00〜18:00</td></tr>
+        <tr><td style="padding:8px; border:1px solid #ccc;">レンタサイクル</td><td style="padding:8px; border:1px solid #ccc;">10:00〜18:00</td></tr>
+      </table>
+
+      <h3>■ オフシーズン（10/1～6/30 ※GW除く）</h3>
+      <table style="width:100%; border-collapse: collapse; margin:15px 0;">
+        <tr style="background:#eee;">
+          <th style="padding:10px; border:1px solid #ccc;">施設</th>
+          <th style="padding:10px; border:1px solid #ccc;">利用時間・定休日</th>
+        </tr>
+        <tr>
+          <td style="padding:8px; border:1px solid #ccc;">フロント</td>
+          <td style="padding:8px; border:1px solid #ccc;">9:00〜19:00（火曜定休）</td>
+        </tr>
+        <tr>
+          <td style="padding:8px; border:1px solid #ccc;">プール・サウナ</td>
+          <td style="padding:8px; border:1px solid #ccc;">10:00〜18:00（土日祝のみ営業）</td>
+        </tr>
+        <tr>
+          <td style="padding:8px; border:1px solid #ccc;">スカッシュコート</td>
+          <td style="padding:8px; border:1px solid #ccc;">10:00〜18:00（火曜定休）</td>
+        </tr>
+        <tr>
+          <td style="padding:8px; border:1px solid #ccc;">フィットネススタジオ</td>
+          <td style="padding:8px; border:1px solid #ccc;">10:00〜18:00（火曜定休）</td>
+        </tr>
+        <tr>
+          <td style="padding:8px; border:1px solid #ccc;">レストラン</td>
+          <td style="padding:8px; border:1px solid #ccc;">10:00〜18:00（火曜定休）</td>
+        </tr>
+        <tr>
+          <td style="padding:8px; border:1px solid #ccc;">バーカウンター</td>
+          <td style="padding:8px; border:1px solid #ccc;">21:00〜23:00（火曜定休）</td>
+        </tr>
+        <tr>
+          <td style="padding:8px; border:1px solid #ccc;">パーティガーデン</td>
+          <td style="padding:8px; border:1px solid #ccc;">10:00〜21:00（火曜定休）</td>
+        </tr>
+        <tr>
+          <td style="padding:8px; border:1px solid #ccc;">アプローチレンジ</td>
+          <td style="padding:8px; border:1px solid #ccc;">10:00〜18:00（11/1〜4/31閉鎖）</td>
+        </tr>
+        <tr>
+          <td style="padding:8px; border:1px solid #ccc;">テニスコート</td>
+          <td style="padding:8px; border:1px solid #ccc;">10:00〜18:00（火曜定休）</td>
+        </tr>
+        <tr>
+          <td style="padding:8px; border:1px solid #ccc;">レンタサイクル</td>
+          <td style="padding:8px; border:1px solid #ccc;">10:00〜18:00（火曜定休）</td>
+        </tr>
+      </table>
+
+      <h3>■ アクティビティ料金（オンシーズン・オフシーズン共通）</h3>
+      <table style="width:100%; border-collapse: collapse; margin:15px 0;">
+        <tr style="background:#eee;">
+          <th style="padding:10px; border:1px solid #ccc;">施設</th>
+          <th style="padding:10px; border:1px solid #ccc;">料金</th>
+          <th style="padding:10px; border:1px solid #ccc;">備考</th>
+        </tr>
+        <tr>
+          <td style="padding:8px; border:1px solid #ccc;">プール・サウナ</td>
+          <td style="padding:8px; border:1px solid #ccc;">500 yen</td>
+          <td style="padding:8px; border:1px solid #ccc;">タオル／ぼうし付</td>
+        </tr>
+        <tr>
+          <td style="padding:8px; border:1px solid #ccc;">スカッシュコート</td>
+          <td style="padding:8px; border:1px solid #ccc;">1,000 yen</td>
+          <td style="padding:8px; border:1px solid #ccc;">2時間</td>
+        </tr>
+        <tr>
+          <td style="padding:8px; border:1px solid #ccc;">フィットネススタジオ</td>
+          <td style="padding:8px; border:1px solid #ccc;">0 yen</td>
+          <td style="padding:8px; border:1px solid #ccc;"></td>
+        </tr>
+        <tr>
+          <td style="padding:8px; border:1px solid #ccc;">パーティガーデン</td>
+          <td style="padding:8px; border:1px solid #ccc;">0 yen</td>
+          <td style="padding:8px; border:1px solid #ccc;"></td>
+        </tr>
+        <tr>
+          <td style="padding:8px; border:1px solid #ccc;">アプローチレンジ</td>
+          <td style="padding:8px; border:1px solid #ccc;">300 yen</td>
+          <td style="padding:8px; border:1px solid #ccc;">ボール付</td>
+        </tr>
+        <tr>
+          <td style="padding:8px; border:1px solid #ccc;">テニスコート</td>
+          <td style="padding:8px; border:1px solid #ccc;">1,000 yen</td>
+          <td style="padding:8px; border:1px solid #ccc;">3時間・ボール／ラケット付</td>
+        </tr>
+        <tr>
+          <td style="padding:8px; border:1px solid #ccc;">レンタサイクル</td>
+          <td style="padding:8px; border:1px solid #ccc;">1,000 yen</td>
+          <td style="padding:8px; border:1px solid #ccc;"></td>
+        </tr>
+      </table>
+
+      <p>※ アクティビティ内容は季節・天候により変更となる場合があります。</p>
+    </div>
+
+    <!-- Netflix -->
+    <div id="netflix" class="content-section">
+      <h2>Netflix 利用案内</h2>
+      <ul>
+        <li>テレビの電源を入れ、「ホーム」ボタンを押します。</li>
+        <li>画面から「Netflix」を選択してください。</li>
+        <li>会社からお知らせしているID／パスワードでログインしてください。</li>
+        <li>視聴後は必ずログアウトしてください。</li>
+        <li>個人のクレジットカード登録や有料コンテンツの購入は行わないでください。</li>
+      </ul>
+    </div>
+
+  </div> <!-- /jp-content -->
+
+  <!-- ================= English Version ================= -->
+  <div id="en-content" style="display:none;">
+    <div class="hint">Tap an icon to see details.</div>
+
+    <div class="icon-grid">
+
+      <!-- Check-in EN：英語チェックインフォームにジャンプ -->
+      <div class="icon-card" onclick="window.open('https://forms.gle/HsimmqRv3UaHaXL7A','_blank')">
+        <div class="icon">🛎️</div>
+        <div>Check-in</div>
+      </div>
+
+      <!-- Check-out EN：exit-en セクションを表示 -->
+      <div class="icon-card" onclick="showSection('en','exit-en')">
+        <div class="icon">✔️</div>
+        <div>Check-out</div>
+      </div>
+
+      <div class="icon-card" onclick="showSection('en','parking-en')">
+        <div class="icon">🚗</div>
+        <div>Parking</div>
+      </div>
+      <div class="icon-card" onclick="showSection('en','stay-en')">
+        <div class="icon">🏠</div>
+        <div>During Stay</div>
+      </div>
+      <div class="icon-card" onclick="showSection('en','winter-en')">
+        <div class="icon">❄️</div>
+        <div>Winter Use</div>
+      </div>
+      <div class="icon-card" onclick="showSection('en','bath-en')">
+        <div class="icon">🛁</div>
+        <div>Bathing</div>
+      </div>
+      <div class="icon-card" onclick="showSection('en','rules-en')">
+        <div class="icon">⚠️</div>
+        <div>Rules</div>
+      </div>
+      <div class="icon-card" onclick="showSection('en','price-en')">
+        <div class="icon">💴</div>
+        <div>Room Fee</div>
+      </div>
+      <div class="icon-card" onclick="showSection('en','activity-en')">
+        <div class="icon">🏃</div>
+        <div>Activities</div>
+      </div>
+      <div class="icon-card" onclick="showSection('en','netflix-en')">
+        <div class="icon">📺</div>
+        <div>Netflix</div>
+      </div>
+    </div>
+
+    <!-- Parking EN -->
+    <div id="parking-en" class="content-section">
+      <h2>Parking</h2>
+      <ul>
+        <li>Please park at space <b>No.5 (Yamashin Home)</b>.</li>
+        <li>After parking, place the parking permit on the dashboard where it is clearly visible.</li>
+        <li>If you come with more than one car, you may use the 2nd building’s free spaces.  
+          However, during the high season, please check with the front desk first.</li>
+      </ul>
+    </div>
+
+    <!-- During Stay EN -->
+    <div id="stay-en" class="content-section">
+      <h2>During Stay (Auto-lock)</h2>
+      <ul>
+        <li>The entrance door is auto-locked.</li>
+        <li><b>① When someone is in the room:</b>  
+          Use the intercom at the entrance of Building II, then the person inside can press the “Unlock” button.</li>
+        <li><b>② When no one is in the room:</b>  
+          Please use your room key to unlock the door.  
+          Always take your key with you when you go out.</li>
+      </ul>
+    </div>
+
+    <!-- Check-out EN -->
+    <div id="exit-en" class="content-section">
+      <h2>Check-out</h2>
+      <ul>
+        <li>Please separate your garbage before you leave.</li>
+        <ul>
+          <li>Burnable: paper, plastic bags, plastic items, food waste</li>
+          <li>Non-burnable: bottles, cans</li>
+        </ul>
+        <li>Put garbage in plastic bags and tie the top lightly. Cleaning staff will collect it.</li>
+        <li>Empty the refrigerator before you leave.</li>
+        <li>Please take home all amenities and personal items you brought.</li>
+        <li>If needed, please write any notes in the check-out form.</li>
+      </ul>
+
+      <p style="margin-top:15px;">
+        ▼ <b>Check-out Form</b><br>
+        <a href="https://forms.gle/WoJgeEBZ1uyT9NUq9" target="_blank" style="color:#007bff; font-size:16px;">
+          Open Check-out Form (Google Form)
+        </a>
+      </p>
+    </div>
+
+    <!-- Winter EN -->
+    <div id="winter-en" class="content-section">
+      <h2>Winter Use</h2>
+      <ul>
+        <li>Water pipes may freeze in winter.</li>
+        <li>Special steps such as draining water are required.  
+          We will provide detailed instructions separately.</li>
+      </ul>
+    </div>
+
+    <!-- Bath EN -->
+    <div id="bath-en" class="content-section">
+      <h2>Bathing</h2>
+      <ul>
+        <li>Hot water is supplied by an electric water heater, and the amount is limited.  
+          Please use water carefully.</li>
+        <li>During and after bathing, please keep the bathroom fan on for at least 30 minutes.</li>
+      </ul>
+    </div>
+
+    <!-- Rules EN -->
+    <div id="rules-en" class="content-section">
+      <h2>House Rules</h2>
+      <ul>
+        <li>No arrival or departure between 10:00 PM and 7:00 AM.</li>
+        <li>No smoking inside the room (including e-cigarettes).</li>
+        <li>Please avoid any behavior that may disturb other guests.</li>
+        <li>Do not use TV, speakers, or smartphones at a very high volume.</li>
+        <li>Do not make personal purchases on subscription services.</li>
+        <li>Do not take any items or equipment from the room.</li>
+        <li>Please do not damage or break any furniture or facilities.</li>
+      </ul>
+    </div>
+
+    <!-- Room Fee EN -->
+    <div id="price-en" class="content-section">
+      <h2>Room Fee</h2>
+      <ul>
+        <li>Children under school age: free</li>
+        <li>Elementary school age and older: <b>2,000 yen</b> per person</li>
+        <li>With pets: + <b>5,000 yen</b> per stay</li>
+      </ul>
+    </div>
+
+    <!-- Activities EN -->
+    <div id="activity-en" class="content-section">
+      <h2>Activities</h2>
+
+      <h3>■ High Season (Apr 29 – May 5, Jul 1 – Sep 30)</h3>
+      <table style="width:100%; border-collapse: collapse; margin:15px 0;">
+        <tr style="background:#eee;">
+          <th style="padding:10px; border:1px solid #ccc;">Facility</th>
+          <th style="padding:10px; border:1px solid #ccc;">Hours</th>
+        </tr>
+        <tr><td style="padding:8px; border:1px solid #ccc;">Front Desk</td><td style="padding:8px; border:1px solid #ccc;">9:00–19:00</td></tr>
+        <tr><td style="padding:8px; border:1px solid #ccc;">Pool & Sauna</td><td style="padding:8px; border:1px solid #ccc;">10:00–18:00</td></tr>
+        <tr><td style="padding:8px; border:1px solid #ccc;">Squash Court</td><td style="padding:8px; border:1px solid #ccc;">10:00–18:00</td></tr>
+        <tr><td style="padding:8px; border:1px solid #ccc;">Fitness Studio</td><td style="padding:8px; border:1px solid #ccc;">10:00–18:00</td></tr>
+        <tr><td style="padding:8px; border:1px solid #ccc;">Restaurant</td><td style="padding:8px; border:1px solid #ccc;">10:00–21:00 (Closed Tue)</td></tr>
+        <tr><td style="padding:8px; border:1px solid #ccc;">Bar Counter</td><td style="padding:8px; border:1px solid #ccc;">21:00–23:00 (Closed Tue)</td></tr>
+        <tr><td style="padding:8px; border:1px solid #ccc;">Party Garden</td><td style="padding:8px; border:1px solid #ccc;">10:00–21:00</td></tr>
+        <tr><td style="padding:8px; border:1px solid #ccc;">Approach Range</td><td style="padding:8px; border:1px solid #ccc;">10:00–18:00</td></tr>
+        <tr><td style="padding:8px; border:1px solid #ccc;">Tennis Court</td><td style="padding:8px; border:1px solid #ccc;">10:00–18:00</td></tr>
+        <tr><td style="padding:8px; border:1px solid #ccc;">Bicycle Rental</td><td style="padding:8px; border:1px solid #ccc;">10:00–18:00</td></tr>
+      </table>
+
+      <h3>■ Low Season (Oct 1 – Jun 30, except Golden Week)</h3>
+      <table style="width:100%; border-collapse: collapse; margin:15px 0;">
+        <tr style="background:#eee;">
+          <th style="padding:10px; border:1px solid #ccc;">Facility</th>
+          <th style="padding:10px; border:1px solid #ccc;">Hours / Closed</th>
+        </tr>
+        <tr>
+          <td style="padding:8px; border:1px solid #ccc;">Front Desk</td>
+          <td style="padding:8px; border:1px solid #ccc;">9:00–19:00 (Closed Tue)</td>
+        </tr>
+        <tr>
+          <td style="padding:8px; border:1px solid #ccc;">Pool & Sauna</td>
+          <td style="padding:8px; border:1px solid #ccc;">10:00–18:00 (Sat, Sun & holidays only)</td>
+        </tr>
+        <tr>
+          <td style="padding:8px; border:1px solid #ccc;">Squash Court</td>
+          <td style="padding:8px; border:1px solid #ccc;">10:00–18:00 (Closed Tue)</td>
+        </tr>
+        <tr>
+          <td style="padding:8px; border:1px solid #ccc;">Fitness Studio</td>
+          <td style="padding:8px; border:1px solid #ccc;">10:00–18:00 (Closed Tue)</td>
+        </tr>
+        <tr>
+          <td style="padding:8px; border:1px solid #ccc;">Restaurant</td>
+          <td style="padding:8px; border:1px solid #ccc;">10:00–18:00 (Closed Tue)</td>
+        </tr>
+        <tr>
+          <td style="padding:8px; border:1px solid #ccc;">Bar Counter</td>
+          <td style="padding:8px; border:1px solid #ccc;">21:00–23:00 (Closed Tue)</td>
+        </tr>
+        <tr>
+          <td style="padding:8px; border:1px solid #ccc;">Party Garden</td>
+          <td style="padding:8px; border:1px solid #ccc;">10:00–21:00 (Closed Tue)</td>
+        </tr>
+        <tr>
+          <td style="padding:8px; border:1px solid #ccc;">Approach Range</td>
+          <td style="padding:8px; border:1px solid #ccc;">10:00–18:00 (Closed Nov 1 – Apr 31)</td>
+        </tr>
+        <tr>
+          <td style="padding:8px; border:1px solid #ccc;">Tennis Court</td>
+          <td style="padding:8px; border:1px solid #ccc;">10:00–18:00 (Closed Tue)</td>
+        </tr>
+        <tr>
+          <td style="padding:8px; border:1px solid #ccc;">Bicycle Rental</td>
+          <td style="padding:8px; border:1px solid #ccc;">10:00–18:00 (Closed Tue)</td>
+        </tr>
+      </table>
+
+      <h3>■ Activity Fees (Same for high & low season)</h3>
+      <table style="width:100%; border-collapse: collapse; margin:15px 0;">
+        <tr style="background:#eee;">
+          <th style="padding:10px; border:1px solid #ccc;">Facility</th>
+          <th style="padding:10px; border:1px solid #ccc;">Fee</th>
+          <th style="padding:10px; border:1px solid #ccc;">Note</th>
+        </tr>
+        <tr>
+          <td style="padding:8px; border:1px solid #ccc;">Pool & Sauna</td>
+          <td style="padding:8px; border:1px solid #ccc;">500 yen</td>
+          <td style="padding:8px; border:1px solid #ccc;">Towel & cap included</td>
+        </tr>
+        <tr>
+          <td style="padding:8px; border:1px solid #ccc;">Squash Court</td>
+          <td style="padding:8px; border:1px solid #ccc;">1,000 yen</td>
+          <td style="padding:8px; border:1px solid #ccc;">per 2 hours</td>
+        </tr>
+        <tr>
+          <td style="padding:8px; border:1px solid #ccc;">Fitness Studio</td>
+          <td style="padding:8px; border:1px solid #ccc;">0 yen</td>
+          <td style="padding:8px; border:1px solid #ccc;"></td>
+        </tr>
+        <tr>
+          <td style="padding:8px; border:1px solid #ccc;">Party Garden</td>
+          <td style="padding:8px; border:1px solid #ccc;">0 yen</td>
+          <td style="padding:8px; border:1px solid #ccc;"></td>
+        </tr>
+        <tr>
+          <td style="padding:8px; border:1px solid #ccc;">Approach Range</td>
+          <td style="padding:8px; border:1px solid #ccc;">300 yen</td>
+          <td style="padding:8px; border:1px solid #ccc;">Balls included</td>
+        </tr>
+        <tr>
+          <td style="padding:8px; border:1px solid #ccc;">Tennis Court</td>
+          <td style="padding:8px; border:1px solid #ccc;">1,000 yen</td>
+          <td style="padding:8px; border:1px solid #ccc;">3 hours, rackets & balls included</td>
+        </tr>
+        <tr>
+          <td style="padding:8px; border:1px solid #ccc;">Bicycle Rental</td>
+          <td style="padding:8px; border:1px solid #ccc;">1,000 yen</td>
+          <td style="padding:8px; border:1px solid #ccc;"></td>
+        </tr>
+      </table>
+
+      <p>※ Activity contents and hours may change depending on the season and weather.</p>
+    </div>
+
+    <!-- Netflix EN -->
+    <div id="netflix-en" class="content-section">
+      <h2>Netflix Guide</h2>
+      <ul>
+        <li>Turn on the TV and press the “Home” button on the remote.</li>
+        <li>Select “Netflix” on the screen.</li>
+        <li>Log in with the ID and password we provided.</li>
+        <li>After watching, please make sure to log out.</li>
+        <li>Please do not register your own credit card or purchase any paid content.</li>
+      </ul>
+    </div>
+
+  </div> <!-- /en-content -->
+
+</body>
+</html>
